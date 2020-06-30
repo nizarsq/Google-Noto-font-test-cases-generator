@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<script language="javascript">
+	function save_File(){
+	         const test = document.getElementById('HTML');
+	         let data = HTML.value;
+	         const textToBLOB = new Blob([data], { type: 'html' });
+	         const sFileName = document.getElementById("bug_number").value 
+	         + '-'+ document.getElementById("font_name").value + '' + document.getElementById("note").value +'.html';
+	         let newLink = document.createElement("a");
+	         newLink.download = sFileName;
+	         
+	         if (window.webkitURL != null) {
+	         newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+	         }
+	         else {
+	         newLink.href = window.URL.createObjectURL(textToBLOB);
+	         newLink.style.display = "html";
+	         document.body.appendChild(newLink);
+	         }
+	         
+	         newLink.click(); 
+	         }
+	      
+	function write_test(){
+	         var lang = '<html lang="' + document.getElementById("language").value + '">';
+	         var header = '<head>' + "\n"+ '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>'
+	         + "\n"+'<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />' 
+	         + "\n"+'<meta http-equiv="Pragma" content="no-cache">'
+	         + "\n"+'<meta http-equiv="Expires" content="0">'
+	         + "\n" +'<style>'
+	         var fontface  = '@font-face { font-family:"' + document.getElementById("font_name").value +'"; src:url("';
+	         var blankfont = '@font-face {font-family: AdobeBlank; src:url(AdobeBlank.ttf);}'
+	         var fontface_weight = document.getElementById("font_weight").value +"."+ document.getElementById("ttf_otf").value
+	         var bug_id = document.getElementById("bug_number").value
+	         var text_input = document.getElementById("text_script").value
+
+	          // This if statment check if unicode isused and convert it to. HTML entity.
+	         if (text_input == "" || text_input.length == 0 || text_input == null){
+	            var text_unicode = document.getElementById("text_unicode").value;
+	            var entityTxt = '';
+	            var HTMLEntity = '';
+	            
+	            for(i=0; i<text_unicode.length; i++)
+	             {
+	               if(text_unicode.charCodeAt(i) != 32)
+	               {
+	                    entityTxt += text_unicode.charAt(i);
+	                    }
+	               if(text_unicode.charCodeAt(i) == 32 || i== text_unicode.length-1)
+	               {
+	                    entityTxt = '&#x' + entityTxt + ';';
+	                    HTMLEntity += entityTxt
+	                    entityTxt = '';
+	                    } 
+	              }
+	                text_input = HTMLEntity;
+	           }
+	                
+	                	
+	         // This combine the test case HTML code
+	         document.getElementById("HTML").value= lang + "\n"+ header 
+	         + "\n"+ fontface + document.getElementById("font_directory").value + document.getElementById("hinted").value 
+	         + "/" + document.getElementById("ttf_otf").value + "/" 
+	         + document.getElementById("font_name").value +"/"+ document.getElementById("font_name").value + "-" + fontface_weight 
+	         + '");' + "\n" + '}' 
+	         + "\n" + blankfont
+	         + "\n" +'</style>' + "\n"+ '</head>' 
+	         + "\n"+ '<body>' + "\n" 
+	         + '<a href="https://github.com/googlefonts/noto-fonts/issues/' + bug_id +'">Issue ' + bug_id +'</a>' + "\n" 
+	         + '<p>' + document.getElementById("font_name").value +' '+ document.getElementById("note").value + '</p>' 
+	         + "\n" + '<p><span style="font-family:' + document.getElementById("font_name").value + ','
+	         + ' AdobeBlank' + '; font-weight:400; background-color:#EDEBEA">'+ text_input +'</span></p>' 
+	         + "\n" + '<lable style="font-size:10px"> Test details:' + "<br>" + 'Tested font directory: ' 
+	         + 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/' 
+	         + document.getElementById("hinted").value + "/" + document.getElementById("ttf_otf").value + "/" 
+	         + document.getElementById("font_name").value +"/"+ document.getElementById("font_name").value +"-"+ fontface_weight 
+	         +'</lable>'
+	         + "<br>" + '<lable style="font-size:10px">Test created date: </lable>' + '<lable style="font-size:10px" id="date"></lable>'
+	         + "\n" +'<script>' 
+	         + "\n" +'var date_tag = new Date(); document.getElementById("date").innerHTML=date_tag;'
+	         + "\n" +'</' +'script>'
+	         + "\n" + '</body>' 
+	         + "\n" + '</html>';
+	         
+	         
+	         
+	         
+HTML.style.height = '300px';
+save_File();
+}
+</script>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<style>
+		body {font-family: arial,sans-serif;}
+		         * {box-sizing: border-box;}
+		         input[type=text], textarea {
+		         width: 100%;
+		         padding: .6em 1.4em .5em .8em;
+		         border: 1px solid #ccc;
+		         border-radius: 15px;
+		         box-sizing: border-box;
+		         margin-top: 6px;
+		         margin-bottom: 16px;
+		         margin-right: 40px;
+		         resize: vertical;
+		         border-radius: 15px;
+		         font-size: 16px;		         
+		         }
+		        
+		         input[type=submit] {
+		         background-color: #1a73e8;
+		         color: white;
+		         padding: .6em 1.4em .5em .8em;
+		         border: none;
+		         cursor: pointer;
+		         border-radius: 15px;
+		         }
+		         
+		         input[type=submit]:hover {
+		         background-color: #4CAF50;
+		         }
+		         
+		         fieldset {
+		         padding: .6em 1.4em .5em .8em;
+		         border-radius: 4px;
+		         margin:10px;
+		         cursor: pointer;
+		         border: 1px solid #1a73e8;
+		         background-color: #dbdbdb;
+		         border-radius: 15px;
+		         width: 100%;
+		         }
+		         
+		         .container {
+		         border-radius: 20px;
+		         background-color: #f2f2f2;
+		         padding: .6em 1.4em .5em .8em;
+		         font-size:20px
+		         box-sizing: border-box;
+		         }
+		         
+		         .center {
+		         display: flex;
+		         justify-content: center;
+		         }
+		         
+		         label { white-space: nowrap; }
+		         	         
+		         .select-box {
+		         margin-right: 40px;
+		         font-size: 16px;
+		         padding: .6em 1.4em .5em .8em;
+		         width: 150px;
+		         border-radius: 15px;
+		         -moz-appearance: none;
+		         -webkit-appearance: none;
+		         background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+		         linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+		         background-repeat: no-repeat, repeat;
+		         background-position: right .7em top 50%, 0 0;
+		         background-size: .65em auto, 100%;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="center">
+		    <h1 style="color:#1a73e8;">Fonts test generator</h1>
+		</div>
+		<form>
+		<fieldset>
+		<label>Font directory <input style="max-width:50%" type="text" id="font_directory" name="font_directory" value="https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@master/phaseIII_only/">
+		</label>
+		</fieldset>
+		<fieldset>
+		<label>Font name <input style="width:20%" type="text" id="font_name" name="fontname" value="NotoSansArabic"></label>
+		<label>Language code <input style="width:90px" type="text" id="language" name="language" value="ar"></label>
+		</fieldset>
+		<fieldset >
+		<label>Hinted/Unhinted <select class="select-box" id="hinted" name="hinted">
+		      <option value="unhinted">unhinted</option>
+		      <option value="hinted">hinted</option>
+		  </select>
+		  </label>
+		  
+		  
+		  <label>Font Type (ttf/otf) <select class="select-box" id="ttf_otf" name="ttf/otf">
+		      <option value="ttf">.ttf</option>
+		      <option value="otf">.otf</option>
+		  </select>
+		  </label>
+		  
+		  <label>Font weight <select class="select-box" id="font_weight" name="font_weight">
+		      <option value="Regular">Regular</option>
+		      <option value="Medium">Medium</option>
+		      <option value="SemiBold">SemiBold</option>
+		      <option value="Bold">Bold</option>
+		      <option value="Extarbold">Extra Bold</option>
+		      <option value="Light">Light</option>
+		      <option value="ExtraLight">ExtraLight</option>
+		      <option value="Thin">Thin</option>
+		      <option value="Black">Black</option>
+		      <option value="Italic">Italic</option>
+		      <option value="Italic">Italic</option>
+		      
+		      
+		      
+		      
+		      
+		      
+		      
+		  </select>
+		  </label>
+		  </fieldset>
+		  <fieldset>
+		  <label for="text_script">Text to test</label>
+		  <input type="text" id="text_script" name="text" placeholder="Enter text here">
+		  <label for="text_unicode">Unicode</label>
+		  <input type="text" id="text_unicode" name="text_unicode" placeholder="Enter unicode here">
+		  <label for="HTML">HTML code</label>
+		  <textarea style="height:100px"  id="HTML" name="HTML" placeholder="" ></textarea>
+		  <label for="bug_number<">Bug number</label>
+		  <input style="width:80px" type="text" id="bug_number" name="bugnumber" placeholder="null">
+		  <label for="note">Optional note</label>
+		  <input style="width:250px" type="text" id="note" name="note" placeholder="Any note to display in the test case">
+		  </fieldset>
+		  </form>
+		  <div class="center">
+				<input type="submit"  style = "font-size:20px" onclick="write_test()" value="Generate and save test case">
+		  </div>
+	</div>
+</body>
+
+</html>
