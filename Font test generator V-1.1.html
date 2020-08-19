@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <script language="javascript">
-
 function write_test(){
 	var script = ''
 	var font_links = ''
-    	var lang = '<html lang="' + document.getElementById("language").value + '">';    
-    	var header = '<head>' + "\n" + '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' 
+	var list_of_fonts = [];
+    var lang = '<html lang="' + document.getElementById("language").value + '">';    
+    const header = '<head>' + "\n" + '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' 
 	+ "\n" + '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />' + "\n" + '<meta http-equiv="Pragma" content="no-cache">' 
 	+ "\n" + '<meta http-equiv="Expires" content="0">' + "\n" + '<style>'
 	var bug_id = document.getElementById("bug_number").value
@@ -16,23 +16,23 @@ function write_test(){
 	var fontface_weight = document.getElementById("font_weight").value
 	var text_input = document.getElementById("text_script").value
 	
-	// Build font name from script name
-	var fontSans = 'NotoSans' + script_name; // script to font name
+	//Build font name from script name
+	var fontSans = 'NotoSans' + script_name;
 	var fontSans_UI = 'NotoSans' + script_name + 'UI';
-	var fontSerif = 'NotoSerif' + script_name; // script to font name
+	var fontSerif = 'NotoSerif' + script_name;
 	
-	// Arabic fonts (non standered font names)
+	//Arabic fonts (non standered font names)
 	var fontNaskh = 'NotoNaskh' + script_name;
 	var fontKufi = 'NotoKufi' + script_name;
 	var fontNastaliq = 'NotoNastaliqUrdu';
 	
-	// Heberew font (non standered font name)
+	//Heberew font (non standered font name)
 	var fontRashi = 'NotoRashiHebrew';
 	
-	// Blank fallback font
+	//Blank fallback font
 	var blankfont = '@font-face{font-family: AdobeBlank; src:url(AdobeBlank.ttf);}' + "\n"
 	
-	// Check if unicode is used and then convert it to HTML format.
+	//Check if unicode is used then convert it to HTML format.
 	if(text_input == "" || text_input.length == 0 || text_input == null){
 	var text_unicode = document.getElementById("text_unicode").value;
 	var entityTxt = '';
@@ -47,21 +47,24 @@ function write_test(){
 	entityTxt = '';
 	}
 	}
+	
 	text_input = HTMLEntity;
 	}
 	
-	
-    // Build @font-face
+    	//Build @font-face
 	function build_font_link(font_name,fontface_weight='Italic'){
 	var fontface_font  = '@font-face{font-family:"' + font_name + '-'+ fontface_weight + '"; src:url("' + document.getElementById("font_directory").value 
 	+ document.getElementById("hinted").value 
 	+ "/" + document.getElementById("ttf_otf").value 
 	+ "/" + font_name + "/" + font_name + "-" + fontface_weight +'.' + document.getElementById("ttf_otf").value 
-	+ '");' + "\n" + '}' + '\n'
+	+ '");' + "\n" + '}' + '\n' 
+	list_of_fonts.push('https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/' + document.getElementById("hinted").value + '/'
+	+ document.getElementById("ttf_otf").value + '/' + font_name + '/' + font_name + '-' + fontface_weight + '.' + document.getElementById("ttf_otf").value
+	+ '<br>')
 	return fontface_font
 	}
 
-    // Build Spans
+    	//Build Spans
 	function build_body(font_name,fontface_weight='Italic'){
 	var body = '<p>' + font_name +'-'+ fontface_weight + ' ' + document.getElementById("note").value + '</p>' + "\n" 
 	+ '<p><span style="font-family:' + font_name + '-'+ fontface_weight + ',' + ' AdobeBlank' + '; font-weight:400; background-color:#EDEBEA">' 
@@ -69,20 +72,19 @@ function write_test(){
 	return body
 	}	
 	
-    // Build footer
+    	//Build footer
 	function build_footer(font_name){
-	var footer  = '\n' + '\n'
+	var footer  = '\n'
 	+ '<lable style="font-size:10px"> Tested font directory:' 
-	+ "<br>" + 'https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/' 
-	+ document.getElementById("hinted").value + "/" + document.getElementById("ttf_otf").value 
+	+ "<br>" + list_of_fonts.join(' ')
 	+ '</lable>' + "<br>" + '<lable style="font-size:10px">Test created date: </lable>' 
 	+ '<lable style="font-size:10px" id="date"></lable>' + "\n" 
 	+ '<script>' + "\n" + 'var date_tag = new Date(); document.getElementById("date").innerHTML=date_tag;' + "\n" + '</' + 'script>' 
-	+ "\n" + "\n" + '</body>' + "\n" +
-	'</html>';
+	+ "\n" + "\n" + '</body>' + "\n" +'</html>'; 
 	return footer
 	}
 	
+	//Call build functions based on script name
 	function build_all_fonts_tests(){
 	if (document.getElementById('Italic_check').checked){
 	font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans)
@@ -106,18 +108,19 @@ function write_test(){
 	function build_LGC_tests(){
 	if(document.getElementById('Italic_check').checked){
 	font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans)
-	+ build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif)
+	+ build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif )+ build_font_link('NotoMono',fontface_weight)
 	+ blankfont
 	+ header_body 
 	+ build_body(fontSans,fontface_weight) + build_body(fontSans)
-	+ build_body(fontSerif,fontface_weight) + build_body(fontSerif)
+	+ build_body(fontSerif,fontface_weight) + build_body(fontSerif) + build_body('NotoMono',fontface_weight)
 	+ build_footer(font_name);
 	script = font_links	}
 	else{
-	font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSerif,fontface_weight)
+	font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSerif,fontface_weight) + build_font_link('NotoMono',fontface_weight)
 	+ blankfont
 	+ header_body 
-	+ build_body(fontSans,fontface_weight) + build_body(fontSerif,fontface_weight) + build_footer(font_name);
+	+ build_body(fontSans,fontface_weight) + build_body(fontSerif,fontface_weight) + build_body('NotoMono',fontface_weight) 
+	+ build_footer(font_name) ;
 	script = font_links }
 	}
 	
@@ -159,6 +162,15 @@ function write_test(){
 	+ build_body(script_name,fontface_weight) + build_footer(script_name);
 	script = font_links }
 	}
+	
+	function build_Symbols_tests(){
+	font_links = build_font_link('NotoSansSymbols',fontface_weight) + build_font_link('NotoSansSymbols2','Regular')
+	+ blankfont
+	+ header_body 
+	+ build_body('NotoSansSymbols',fontface_weight) + build_body('NotoSansSymbols2','Regular') 
+	+ build_footer(font_name);
+	script = font_links
+	}
 
 	//Check script name for specia cases fonts
 	if(script_name == "Arabic"){
@@ -172,21 +184,25 @@ function write_test(){
 	}
 	else if(script_name == "Arimo" || script_name == "Cousine" || script_name == "Tinos"){
 	build_ArimoTinosCousine_tests()
-	}   
+	}
+	else if(script_name == "Symbols" || script_name == "Symbols2"){
+	build_Symbols_tests()
+	}  
 	else{
 	build_all_fonts_tests()
 	}
 		
-	// Combine the test case HTML code
+	//Combine the test case HTML code
 	document.getElementById("HTML").value = lang + "\n" + header + "\n" + script
 	
 	HTML.style.height = '300px';
 	save_File();
 	}
 	
+	//Convert and save created HTML file
 	function save_File(){
 		var filename = document.getElementById("font_name").value
-		if(document.getElementById("font_name").value == ""){filename = 'NotoSans_NotoSerif'}
+		if(document.getElementById("font_name").value == ""){filename = 'NotoSans_NotoSerif_Noto_Mono'}
 		const test = document.getElementById('HTML');
 		let data = HTML.value;
 		const textToBLOB = new Blob([data],{type: 'html'});
@@ -288,7 +304,7 @@ function write_test(){
 		<form>
 			<fieldset>
 				<label>Font directory
-					<input style="max-width:50%" type="text" id="font_directory" disabled name="font_directory" value="https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@master/phaseIII_only/"> 
+					<input style="max-width:50%" type="text" id="font_directory" name="font_directory" value="https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@master/phaseIII_only/"> 
 				</label>
 			</fieldset>
 			<fieldset>
@@ -314,7 +330,7 @@ function write_test(){
 				</label>
 				
 				<label>Font weight
-					<select class="select-box" id="font_weight"  disabled name="font_weight">
+					<select class="select-box" id="font_weight" name="font_weight">
 						<option value="Regular">Regular</option>
 						<option value="Medium">Medium</option>
 						<option value="SemiBold">SemiBold</option>
