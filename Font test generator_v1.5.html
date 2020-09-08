@@ -4,6 +4,7 @@
   <head>
   <title>Fonts test generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <meta charset="utf-8">
   <script>
@@ -130,9 +131,17 @@
                     entityTxt += text_unicode.charAt(i);
                 }
                 if(text_unicode.charCodeAt(i) == 32 || i == text_unicode.length - 1){
-                    entityTxt = '&#x' + entityTxt + ';';
-                    HTMLEntity += entityTxt
-                    entityTxt = '';
+                    if (entityTxt =='<br>'){
+                        entityTxt = entityTxt;
+                        HTMLEntity += entityTxt
+                        entityTxt = '';
+                    }
+                    
+                    else{
+                        entityTxt = '&#x' + entityTxt + ';';
+                        HTMLEntity += entityTxt
+                        entityTxt = '';
+                    }
                 }
             }
 		  text_input = HTMLEntity;
@@ -406,7 +415,6 @@
     resize: vertical;
     border-radius: 15px;
     font-size: 1vw;}
-    
  
   </style>
   </head>
@@ -489,7 +497,10 @@
                 <label style="margin-left: 12px;" for="text_script">Text to test</label>
 				<input style="width: 100%;padding: .6em 1.4em; margin-left: 12px;" id="text_script" name="text" placeholder="Enter text here" type="text">
 				<label style="margin-left: 12px;" for="text_unicode">Unicode hex digits</label>
+				<span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="To insert space or new line use shift+Space or shift+Enter">
+				<i class="fa fa-info-circle" style="font-size:12px" Hover="fff"></i>
 				<input style="width: 100%;padding: .6em 1.4em; margin-left: 12px;" id="text_unicode" name="text_unicode" placeholder="Enter text as unicode hex digits separated by spaces" type="text">
+				</span>
 				<label style="margin-left: 12px;" for="HTML">HTML code</label>
 				<textarea style="margin-left: 12px;" id="HTML" name="HTML" placeholder="" style="height:100px"></textarea>
 				<label style="margin-left: 12px;" for="bug_number&lt;">Bug number</label>
@@ -508,175 +519,69 @@
        //Check if no langguage code entered by the user. 
        function detect_language_code(){
            var script_code = ""
-           var language_code  = {"Adlam":"Adlm",
-           "Ahom":"Ahom",
-           "AnatolianHieroglyphs":"Hluw",
-           "Arabic":"Arab",
-           "Armenian":"Armn",
-           "Avestan":"Avst",
-           "Balinese":"Bali",
-           "Bamum":"Bamu",
-           "BassaVah":"Bass",
-           "Batak":"Batk",
-           "Bengali":"Beng",
-           "Bhaiksuki":"Bhks",
-           "Brahmi":"Brah",
-           "Buginese":"Bugi",
-           "Buhid":"Buhd",
-           "CanadianAboriginal":"Cans",
-           "Carian":"Cari",
-           "CaucasianAlbanian":"Aghb",
-           "Chakma":"Cakm",
-           "Cham":"Cham",
-           "Cherokee":"Cher",
-           "Chorasmian":"Chrs",
-           "Coptic":"Copt",
-           "Cuneiform":"Xsux",
-           "Cypriot":"Cprt",
-           "Deseret":"Dsrt",
-           "Devanagari":"Deva",
-           "DivesAkuru":"Diak",
-           "Dogra":"Dogr",
-           "Duployan":"Dupl",
-           "EgyptianHieroglyphs":"Egyp",
-           "Elbasan":"Elba",
-           "Elymaic":"Elym",
-           "Ethiopic":"Ethi",
-           "Georgian":"Geor",
-           "Glagolitic":"Glag",
-           "Gothic":"Goth",
-           "Grantha":"Gran",
-           "Gujarati":"Gujr",
-           "GunjalaGondi":"Gong",
-           "Gurmukhi":"Guru",
-           "HanifiRohingya":"Rohg",
-           "Hanunoo":"Hano",
-           "Hatran":"Hatr","Hebrew":"Hebr",
-           "ImperialAramaic":"Armi",
-           "InscriptionalPahlavi":"Phli",
-           "InscriptionalParthian":"Prti",
-           "Javanese":"Java",
-           "Kaithi":"Kthi",
-           "Kannada":"Knda",
-           "KayahLi":"Kali",
-           "Kharoshthi":"Khar",
-           "KhitanSmall":"Kits",
-           "Khmer":"Khmr",
-           "Khojki":"Khoj",
-           "Khudawadi":"Sind",
-           "Lao":"Laoo",
-           "Lepcha":"Lepc",
-           "Limbu":"Limb",
-           "LinearA":"Lina",
-           "LinearB":"Linb",
-           	"Lisu":"Lisu",
-           "Lycian":"Lyci",
-           "Lydian":"Lydi",
-           "Mahajani":"Mahj",
-           "Makasar":"Maka",
-           "Malayalam":"Mlym",
-           "Mandaic":"Mand",
-           "Manichaean":"Mani",
-           "Marchen":"Marc",
-           "MasaramGondi":"Gonm",
-           "Math":"Zmth",
-           "MayanNumerals":"Maya",
-           "Medefaidrin":"Medf",
-           "MeeteiMayek":"Mtei",
-           "MendeKikakui":"Mend",
-           "Meroitic":"Merc",
-           "Miao":"Plrd",
-           "Modi":"Modi",
-           "Mongolian":"Mong",
-           "Mro":"Mroo",
-           "Multani":"Mult",
-           "Music":"Zsym",
-           "Myanmar":"Mymr",
-           "Nabataean":"Nbat",
-           "Nandinagari":"Nand",
-           "Newa":"Newa",
-           "NewTaiLue":"Talu",
-           "NKo":"Nkoo",
-           "Nushu":"Nshu",
-           "NyiakengPuachueHmong":"Hmnp",
-           "Ogham":"Ogam",
-           	"OlChiki":"Olck",
-           	"OldHungarian":"Hung",
-           "OldItalic":"Ital",
-           "OldNorthArabian":"Narb",
-           "OldPermic":"Perm",
-           "OldPersian":"Xpeo",
-           "OldSogdian":"Sogo",
-           "OldSouthArabian":"Sarb",
-           "OldTurkic":"Orkhv",
-           "Oriya":"Orya",
-           "Osage":"Osge",
-           "Osmanya":"Osma",
-           "PahawhHmong":"Hmng",
-           "Palmyrene":"Palm",
-           "PauCinHau":"Pauc",
-           "PhagsPa":"Phag",
-           "Phoenician":"Phnx",
-           "PsalterPahlavi":"Phlp",
-           "Rejang":"Rjng",
-           "Runic":"Runr",
-           "Samaritan":"Samr",
-           "Saurashtra":"Saur",
-           "Sharada":"Shrd",
-           "Shavian":"Shaw",
-           "Siddham":"Sidd",
-           "SignWriting":"Sgnw",
-           "Sinhala":"Sinh",
-           "Sogdian":"Sogd",
-           "SoraSompeng":"Sora",
-           "Soyombo":"Soyo",
-           "Sundanese":"Sund",
-           "SylotiNagri":"Sylo",
-           "Symbols":"Zsym",
-           "Syriac":"Syrc",
-           "Tagalog":"Tglg",
-           "Tagbanwa":"Tagb",
-           "TaiLe":"Tale",
-           "TaiTham":"Lana",
-           "TaiViet":"Tavt",
-           "Takri":"Takr",
-           "Tamil":"Taml",
-           "Tangut":"Tang",
-           "Telugu":"Telu",
-           "Thaana":"Thaa",
-           "Thai":"Thai",
-           "Tibetan":"Tibt",
-           "Tifinagh":"Tfng",
-           "Tirhuta":"Tirh",
-           "Ugaritic":"Ugar",
-           "Vai":"Vaii",
-           "Wancho":"Wcho",
-           "WarangCiti":"Wara",
-           "Yezidi":"Yezi",
-           "Yi":"Yiii",
-           "ZanabazarSquare":"Zanb"
-       };
-	
-       script_code = language_code[document.getElementById("font_name").value];
-       if (script_code === undefined || document.getElementById("font_name").value === ""){
-           document.getElementById("language").value ="en"
-	   }
-       else {
-           document.getElementById("language").value = script_code
-	   }
-    }
-	document.getElementById('main_form').onkeypress = function(e){
-	if (!e) e = window.event;
-	   if (e.keyCode == '13')  {
-	   if (document.getElementById("text_script").value !="" || document.getElementById("text_unicode").value !=""){
-		write_test();
-		}
-		else{
-		alert("Please enter text to test or codepoints");
-		}
-		return false;
-		}
-	}
+           var language_code = 
+           {"Adlam":"Adlm","Ahom":"Ahom","AnatolianHieroglyphs":"Hluw","Arabic":"Arab","Armenian":"Armn","Avestan":"Avst","Balinese":"Bali",
+           "Bamum":"Bamu","BassaVah":"Bass","Batak":"Batk","Bengali":"Beng","Bhaiksuki":"Bhks","Brahmi":"Brah","Buginese":"Bugi","Buhid":"Buhd",
+           "CanadianAboriginal":"Cans","Carian":"Cari","CaucasianAlbanian":"Aghb","Chakma":"Cakm","Cham":"Cham","Cherokee":"Cher","Chorasmian":"Chrs",
+           "Coptic":"Copt","Cuneiform":"Xsux","Cypriot":"Cprt","Deseret":"Dsrt","Devanagari":"Deva","DivesAkuru":"Diak","Dogra":"Dogr","Duployan":"Dupl",
+           "EgyptianHieroglyphs":"Egyp","Elbasan":"Elba","Elymaic":"Elym","Ethiopic":"Ethi","Georgian":"Geor","Glagolitic":"Glag","Gothic":"Goth",
+           "Grantha":"Gran","Gujarati":"Gujr","GunjalaGondi":"Gong","Gurmukhi":"Guru","HanifiRohingya":"Rohg","Hanunoo":"Hano","Hatran":"Hatr",
+           "Hebrew":"Hebr","ImperialAramaic":"Armi","InscriptionalPahlavi":"Phli","InscriptionalParthian":"Prti","Javanese":"Java","Kaithi":"Kthi",
+           "Kannada":"Knda","KayahLi":"Kali","Kharoshthi":"Khar","KhitanSmall":"Kits","Khmer":"Khmr","Khojki":"Khoj","Khudawadi":"Sind","Lao":"Laoo",
+           "Lepcha":"Lepc","Limbu":"Limb","LinearA":"Lina","LinearB":"Linb","Lisu":"Lisu","Lycian":"Lyci","Lydian":"Lydi","Mahajani":"Mahj","Makasar":"Maka",
+           "Malayalam":"Mlym","Mandaic":"Mand","Manichaean":"Mani","Marchen":"Marc","MasaramGondi":"Gonm","Math":"Zmth","MayanNumerals":"Maya",
+           "Medefaidrin":"Medf","MeeteiMayek":"Mtei","MendeKikakui":"Mend","Meroitic":"Merc","Miao":"Plrd","Modi":"Modi","Mongolian":"Mong","Mro":"Mroo",
+           "Multani":"Mult","Music":"Zsym","Myanmar":"Mymr","Nabataean":"Nbat","Nandinagari":"Nand","Newa":"Newa","NewTaiLue":"Talu","NKo":"Nkoo",
+           "Nushu":"Nshu","NyiakengPuachueHmong":"Hmnp","Ogham":"Ogam","OlChiki":"Olck","OldHungarian":"Hung","OldItalic":"Ital","OldNorthArabian":"Narb",
+           "OldPermic":"Perm","OldPersian":"Xpeo","OldSogdian":"Sogo","OldSouthArabian":"Sarb","OldTurkic":"Orkhv","Oriya":"Orya","Osage":"Osge",
+           "Osmanya":"Osma","PahawhHmong":"Hmng","Palmyrene":"Palm","PauCinHau":"Pauc","PhagsPa":"Phag","Phoenician":"Phnx","PsalterPahlavi":"Phlp",
+           "Rejang":"Rjng","Runic":"Runr","Samaritan":"Samr","Saurashtra":"Saur","Sharada":"Shrd","Shavian":"Shaw","Siddham":"Sidd","SignWriting":"Sgnw",
+           "Sinhala":"Sinh","Sogdian":"Sogd","SoraSompeng":"Sora","Soyombo":"Soyo","Sundanese":"Sund","SylotiNagri":"Sylo","Symbols":"Zsym",
+           "Syriac":"Syrc","Tagalog":"Tglg","Tagbanwa":"Tagb","TaiLe":"Tale","TaiTham":"Lana","TaiViet":"Tavt","Takri":"Takr","Tamil":"Taml",
+           "Tangut":"Tang","Telugu":"Telu","Thaana":"Thaa","Thai":"Thai","Tibetan":"Tibt","Tifinagh":"Tfng","Tirhuta":"Tirh","Ugaritic":"Ugar",
+           "Vai":"Vaii","Wancho":"Wcho","WarangCiti":"Wara","Yezidi":"Yezi","Yi":"Yiii","ZanabazarSquare":"Zanb"
+           };
+           
+           script_code = language_code[document.getElementById("font_name").value];
+          if (script_code === undefined || document.getElementById("font_name").value === ""){
+               document.getElementById("language").value ="en"
+          }
+          else {
+               document.getElementById("language").value = script_code
+               }
+          }
+          document.getElementById('text_script').onkeypress = function(e){
+             if (!e) e = window.event;
+             if (e.keyCode == '13') {
+             if (document.getElementById("text_script").value !="" || document.getElementById("text_unicode").value !=""){
+                write_test();
+             }
+             else{
+                alert("Please enter text to test or codepoints");
+             }
+             return false;
+            }
+           }
+        
+       function KeyPress(e) {
+           var evtobj = window.event? event : e
+           var i = ""
+           var elem = document.getElementById('text_unicode');
+           var old =""
+           if (evtobj.keyCode == 32 && evtobj.shiftKey){ 
+               i = " 0020"
+               old = elem.value;
+               elem.value = old + i;
+            }
+           
+           else if (evtobj.keyCode == 13 && evtobj.shiftKey){ 
+               i = " <br> "
+               old = elem.value;
+               elem.value = old + i;
+               i = ""
+           }               
+        }
+        document.getElementById('text_unicode').onkeydown = KeyPress;
 	</script>
   </body>
 </html>
