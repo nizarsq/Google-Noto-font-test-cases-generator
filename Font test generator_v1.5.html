@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -72,19 +71,17 @@
 		    
         if (document.getElementById("font_name").value === ""){
 		    document.getElementById("language").value ="en"
-		    }
+        }
 		
         var lang = '<html lang="' + document.getElementById("language").value + '">';    
         const header = '<head>' + test_environment_function + "\n" + '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>' 
 			+ "\n" + '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />' + "\n" 
 			+ '<meta http-equiv="Pragma" content="no-cache">' 
-			+ "\n" + '<meta http-equiv="Expires" content="0">' + "\n" + '<style>'
-			
+			+ "\n" + '<meta http-equiv="Expires" content="0">' + "\n" + '<style>'	
         var bug_id = document.getElementById("bug_number").value
         var script_name = document.getElementById("font_name").value;
         var header_body ='<\/style>' + "\n" + '<\/head>' + "\n"+ '<body>' + "\n" 
-			+ '<a href="https://github.com/googlefonts/noto-fonts/issues/' + bug_id +'">Issue ' + bug_id +'<\/a>' + "\n" 
-			
+			+ '<a href="https://github.com/googlefonts/noto-fonts/issues/' + bug_id +'">Issue ' + bug_id +'<\/a>' + "\n" 	
         var fontface_weight = document.getElementById("font_weight").value
         var text_input = document.getElementById("text_script").value
 			   
@@ -137,7 +134,7 @@
                         entityTxt = '';
                     }
                     
-                    else{
+                    else {
                         entityTxt = '&#x' + entityTxt + ';';
                         HTMLEntity += entityTxt
                         entityTxt = '';
@@ -148,15 +145,15 @@
         }
 		
 		
-			 //Build @font-face
+	    //Build @font-face
             function build_font_link(font_name,fontface_weight='Italic'){
                 var fontface_font  = '@font-face{font-family:"' + font_name + '-'+ fontface_weight + '"; src:url("'
                 + document.getElementById("font_directory").value 
                 + document.getElementById("hinted").value 
                 + "/" + document.getElementById("ttf_otf").value 
                 + "/" + font_name + "/" + font_name + "-" + fontface_weight +'.' + document.getElementById("ttf_otf").value 
-                + '");' + "\n" + '}' + '\n' 
-			    list_of_fonts.push('https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/' 
+                + '");' + "\n" + '}' + '\n'
+		list_of_fonts.push('https://github.com/googlefonts/noto-fonts/tree/master/phaseIII_only/' 
                 + document.getElementById("hinted").value + '/'
                 + document.getElementById("ttf_otf").value + '/' + font_name + '/' + font_name + '-' + fontface_weight + '.' 
                 + document.getElementById("ttf_otf").value + '<br>')
@@ -212,7 +209,7 @@
                     + build_footer(font_name);
                     script = font_links
                 }
-			   else {
+		else {
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans_UI,fontface_weight)
                     + build_font_link(fontSerif,fontface_weight)
                     + blankfont + local_fnt
@@ -220,10 +217,11 @@
                     + local_font
                     + build_body(fontSans,fontface_weight) + build_body(fontSans_UI,fontface_weight) 
                     + build_body(fontSerif,fontface_weight) + build_footer(font_name);
-                    script = font_links}
-                }
+                    script = font_links
+		}
+            }
 			   
-			function build_LGC_tests(){
+            function build_LGC_tests(){
                 if (document.getElementById('Italic_check').checked){
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans)
                     + build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif )+ build_font_link('NotoMono',fontface_weight)
@@ -234,7 +232,7 @@
                     + build_body(fontSerif,fontface_weight) + build_body(fontSerif) + build_body('NotoMono',fontface_weight)
                     + build_footer(font_name);
                     script = font_links}
-			   else {
+                else {
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSerif,fontface_weight)
                     + build_font_link('NotoMono',fontface_weight)
                     + blankfont + local_fnt
@@ -243,9 +241,9 @@
                     + build_body(fontSans,fontface_weight) + build_body(fontSerif,fontface_weight) + build_body('NotoMono',fontface_weight) 
                     + build_footer(font_name);
                     script = font_links}
-			}
+            }
 			   
-			function build_arabic_tests(){
+            function build_arabic_tests(){
                 font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontNaskh,fontface_weight)
                 + build_font_link(fontKufi,fontface_weight)
                 + build_font_link(fontNastaliq,fontface_weight)
@@ -256,9 +254,9 @@
                 + build_body(fontNaskh,fontface_weight) + build_body(fontNastaliq,fontface_weight)
                 + build_footer(font_name);
                 script = font_links
-			}
+            }
 			   
-			function build_hebrew_tests(){
+            function build_hebrew_tests(){
                 font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSerif,fontface_weight)
                 + build_font_link(fontRashi,fontface_weight)
                 + blankfont + local_fnt
@@ -268,9 +266,9 @@
                 + build_body(fontRashi,fontface_weight)
                 + build_footer(font_name);
                 script = font_links
-			}
+            }
 			   
-			function build_ArimoTinosCousine_tests(){
+            function build_ArimoTinosCousine_tests(){
                 if(document.getElementById('Italic_check').checked){
                     font_links = build_font_link(script_name,fontface_weight) + build_font_link(script_name, 'Italic')
                     + blankfont + local_fnt
@@ -286,9 +284,9 @@
                     + local_font
                     + build_body(script_name,fontface_weight) + build_footer(script_name);
                     script = font_links}
-			   }
+            }
 			   
-			function build_Symbols_tests(font_name = fontSans){
+            function build_Symbols_tests(font_name = fontSans){
                 font_links = build_font_link(font_name,fontface_weight) + build_font_link('NotoSansSymbols2','Regular')
                 + blankfont + local_fnt
                 + header_body 
@@ -296,9 +294,9 @@
                 + build_body(font_name,fontface_weight) + build_body('NotoSansSymbols2','Regular') 
                 + build_footer(font_name);
                 script = font_links
-			}
+            }
 			   
-			function build_Nushu_tests(font_name = fontSans){
+            function build_Nushu_tests(font_name = fontSans){
                 font_links = build_font_link(font_name,fontface_weight) + build_font_link('NotoTraditionalNushu',fontface_weight)
                 + blankfont + local_fnt
                 + header_body 
@@ -306,67 +304,66 @@
                 + build_body(font_name,fontface_weight) + build_body('NotoTraditionalNushu',fontface_weight) 
                 + build_footer(font_name);
                 script = font_links 
-			}
+            }
 			   
 		
 			//Check script name for special cases fonts
-			if(script_name == "Arabic"){
-			    build_arabic_tests()
-			}
+            if(script_name == "Arabic"){
+		    build_arabic_tests()
+            }
 			   
-			else if(script_name == "Hebrew"){
-			    build_hebrew_tests()
-			}
+            else if(script_name == "Hebrew"){
+		    build_hebrew_tests()
+            }
 			   
-			else if(script_name == ""){
-			    build_LGC_tests()
-			}
+            else if(script_name == ""){
+		    build_LGC_tests()
+            }
 			   
-			else if(script_name == "Arimo" || script_name == "Cousine" || script_name == "Tinos"){
-			    build_ArimoTinosCousine_tests()
-			}
+            else if(script_name == "Arimo" || script_name == "Cousine" || script_name == "Tinos"){
+		    build_ArimoTinosCousine_tests()
+            }
 			   
-			else if(script_name.includes('Symbols')){
-			    build_Symbols_tests('NotoSansSymbols')
-			}
+            else if(script_name.includes('Symbols')){
+		    build_Symbols_tests('NotoSansSymbols')
+            }
 			   
-			else if(script_name.includes('Nushu')){
-			    build_Nushu_tests('NotoSansNushu')
-			}
+            else if(script_name.includes('Nushu')){
+		    build_Nushu_tests('NotoSansNushu')
+            }
 			   
-			else {
-			    build_all_fonts_tests()
-			}
+            else {
+		    build_all_fonts_tests()
+            }
 			       
-			//Combine the test case HTML code
-			document.getElementById("HTML").value = lang + "\n" + header + "\n" + script
-			   
-			HTML.style.height = '300px';
-			save_File();
+            //Combine the test case HTML code
+            document.getElementById("HTML").value = lang + "\n" + header + "\n" + script	   
+            HTML.style.height = '300px';
+            save_File();
         }
 			   
         // Convert and save created HTML file
-        function save_File(){
-            var filename = document.getElementById("font_name").value
-            if(document.getElementById("font_name").value == ""){
-                filename = 'NotoSans_NotoSerif_NotoMono'
+            function save_File(){
+		    var filename = document.getElementById("font_name").value
+		    if(document.getElementById("font_name").value == ""){
+			    filename = 'NotoSans_NotoSerif_NotoMono'
+		    }
+		    const test = document.getElementById('HTML');
+		    let data = HTML.value;
+		    const textToBLOB = new Blob([data],{type: 'html'});
+		    const sFileName = document.getElementById("bug_number").value + '-' + filename + '.html';
+		    let newLink = document.createElement("a");
+		    newLink.download = sFileName;
+		    if(window.webkitURL != null){
+			    newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+		    } 
+		    else {
+			    newLink.href = window.URL.createObjectURL(textToBLOB);
+			    newLink.style.display = "html";
+			    document.body.appendChild(newLink);
+		    }
+		    newLink.click();
             }
-            const test = document.getElementById('HTML');
-            let data = HTML.value;
-            const textToBLOB = new Blob([data],{type: 'html'});
-            const sFileName = document.getElementById("bug_number").value + '-' + filename + '.html';
-            let newLink = document.createElement("a");
-            newLink.download = sFileName;
-            if(window.webkitURL != null){
-			   newLink.href = window.webkitURL.createObjectURL(textToBLOB);
-			} 
-            else{
-			   newLink.href = window.URL.createObjectURL(textToBLOB);
-			   newLink.style.display = "html";
-			   document.body.appendChild(newLink);
-            }
-			   newLink.click();
-        }
   </script>
   <style>
     input[type=text],textarea{
@@ -415,7 +412,6 @@
     resize: vertical;
     border-radius: 15px;
     font-size: 1vw;}
- 
   </style>
   </head>
   <body>
@@ -423,6 +419,7 @@
             <h1 style="color:#337ab7;">Fonts test generator</h1>
         </div>
         <form id="main_form" class="form-inline">
+		
             <fieldset>
                 <div style = "background-color: #dbdbdb;margin-left: 1px;" class="container">
                     <div class="form-group">
@@ -434,7 +431,6 @@
                         <label for="font_local"> Local font</label>
                         <input style="min-width:30vw;" type="file" class="form-control" id="font_local" name="font_local" accept=".ttf,.otf">
                     </div>
-
             </fieldset>
     
             <fieldset>
@@ -455,16 +451,16 @@
                     <div class="form-group">
                         <label for="hinted">Hinted/Unhinted</label>
                         <select style="border-radius: 15px;max-width:20vw;" class="form-control" id="hinted" name="hinted">
-                            <option value="unhinted">unhinted</option>
-						    <option value="hinted">hinted</option>
-					    </select>
+				<option value="unhinted">unhinted</option>
+				<option value="hinted">hinted</option>
+                        </select>
                     </div>
                 
                     <div class="form-group">
                         <label for="hinted">Font Type (ttf/otf)</label>
                         <select style="border-radius: 15px;max-width:20vw;" class="form-control" id="ttf_otf" name="ttf_otf">
                             <option value="ttf">.ttf</option>
-						  <option value="otf">.otf</option>
+                            <option value="otf">.otf</option>
                         </select>
                     </div>
 
@@ -472,15 +468,15 @@
                         <label for="font_weight">Font weight</label>
                         <select style="border-radius: 15px;max-width:20vw;" class="form-control" id="font_weight" name="font_weight">
                             <option value="Regular">Regular</option>
-						  <option value="Medium">Medium</option>
-						  <option value="SemiBold">SemiBold</option>
-						  <option value="Bold">Bold</option>
-						  <option value="Extarbold">Extra Bold</option>
-						  <option value="Light">Light</option>
-						  <option value="ExtraLight">ExtraLight</option>
-						  <option value="Thin">Thin</option>
-						  <option value="Black">Black</option>
-						  <option value="Italic">Italic</option>
+                            <option value="Medium">Medium</option>
+                            <option value="SemiBold">SemiBold</option>
+                            <option value="Bold">Bold</option>
+                            <option value="Extarbold">Extra Bold</option>
+                            <option value="Light">Light</option>
+                            <option value="ExtraLight">ExtraLight</option>
+                            <option value="Thin">Thin</option>
+                            <option value="Black">Black</option>
+                            <option value="Italic">Italic</option>
                         </select>
                     </div>
         
@@ -542,46 +538,46 @@
            "Vai":"Vaii","Wancho":"Wcho","WarangCiti":"Wara","Yezidi":"Yezi","Yi":"Yiii","ZanabazarSquare":"Zanb"
            };
            
-           script_code = language_code[document.getElementById("font_name").value];
+          script_code = language_code[document.getElementById("font_name").value];
           if (script_code === undefined || document.getElementById("font_name").value === ""){
                document.getElementById("language").value ="en"
           }
           else {
                document.getElementById("language").value = script_code
-               }
           }
-          document.getElementById('text_script').onkeypress = function(e){
-             if (!e) e = window.event;
-             if (e.keyCode == '13') {
-             if (document.getElementById("text_script").value !="" || document.getElementById("text_unicode").value !=""){
+       }
+       document.getElementById('text_script').onkeypress = function(e){
+	       if (!e) e = window.event;
+	       if (e.keyCode == '13') {
+	       if (document.getElementById("text_script").value !="" || document.getElementById("text_unicode").value !=""){
                 write_test();
-             }
-             else{
-                alert("Please enter text to test or codepoints");
+	       }
+	       else {
+		       alert("Please enter text to test or codepoints");
              }
              return false;
             }
            }
         
        function KeyPress(e) {
-           var evtobj = window.event? event : e
-           var i = ""
-           var elem = document.getElementById('text_unicode');
-           var old =""
-           if (evtobj.keyCode == 32 && evtobj.shiftKey){ 
-               i = " 0020"
-               old = elem.value;
-               elem.value = old + i;
-            }
+	       var evtobj = window.event? event : e
+	       var i = ""
+	       var elem = document.getElementById('text_unicode');
+	       var old =""
+	       if (evtobj.keyCode == 32 && evtobj.shiftKey){ 
+		       i = " 0020"
+		       old = elem.value;
+		       elem.value = old + i;
+	       }
            
-           else if (evtobj.keyCode == 13 && evtobj.shiftKey){ 
-               i = " <br> "
-               old = elem.value;
-               elem.value = old + i;
-               i = ""
-           }               
-        }
-        document.getElementById('text_unicode').onkeydown = KeyPress;
-	</script>
-  </body>
+	       else if (evtobj.keyCode == 13 && evtobj.shiftKey){ 
+		       i = " <br> "
+		       old = elem.value;
+		       elem.value = old + i;
+		       i = ""
+	       }               
+       }
+       document.getElementById('text_unicode').onkeydown = KeyPress;
+  </script>
+</body>
 </html>
