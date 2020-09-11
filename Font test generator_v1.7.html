@@ -102,8 +102,8 @@
         const blankfont = '@font-face{font-family: AdobeBlank; src:url(AdobeBlank.ttf);'+ "\n"+ '}' + "\n"
 			   
         //local font
-        var local_fnt = ""
-        var local_font = ""
+        var local_fnt_face = ""
+        var local_fnt_p = ""
 			
         if(text_input == "" || text_input.length == 0 || text_input == null){
             convert_unicode()
@@ -111,8 +111,9 @@
 			     
         if (document.getElementById("font_local").value !== ""){
             var dir = document.getElementById("font_local").files[0].name;
-            local_fnt = '@font-face{font-family:' + dir + '; src:url('+ "'"+ dir + "'"+ ');' + "\n" +'}' + "\n"
-            local_font = '<p>'+ dir + ' (local font)</p>' + "\n"+ '<p dir="auto"><span style="font-family:' + dir + ', AdobeBlank; background-color:#EDEBEA">'+ text_input +'</span></p>' + "\n"}
+            var local_fnt_p_parsed = dir.split(".", 1);
+            local_fnt_face = '@font-face{font-family:' + local_fnt_p_parsed + '; src:url('+ "'"+ dir + "'"+ ');' + "\n" +'}' + "\n"
+            local_fnt_p = '<p>'+ dir + ' (local font)</p>' + "\n"+ '<p dir="auto"><span style="font-family:' + local_fnt_p_parsed + ', AdobeBlank; background-color:#EDEBEA">'+ text_input +'</span></p>' + "\n"}
 
 		
 
@@ -201,9 +202,9 @@
                 if (document.getElementById('Italic_check').checked){
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans)
                     + build_font_link(fontSans_UI,fontface_weight)+ build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif)
-                    + blankfont + local_fnt
+                    + blankfont + local_fnt_face
                     + header_body
-                    + local_font
+                    + local_fnt_p
                     + build_body(fontSans,fontface_weight) + build_body(fontSans) + build_body(fontSans_UI,fontface_weight) 
                     + build_body(fontSerif,fontface_weight) + build_body(fontSerif)
                     + build_footer(font_name);
@@ -212,9 +213,9 @@
 		else {
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans_UI,fontface_weight)
                     + build_font_link(fontSerif,fontface_weight)
-                    + blankfont + local_fnt
+                    + blankfont + local_fnt_face
                     + header_body
-                    + local_font
+                    + local_fnt_p
                     + build_body(fontSans,fontface_weight) + build_body(fontSans_UI,fontface_weight) 
                     + build_body(fontSerif,fontface_weight) + build_footer(font_name);
                     script = font_links
@@ -225,9 +226,9 @@
                 if (document.getElementById('Italic_check').checked){
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSans)
                     + build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif )+ build_font_link('NotoMono',fontface_weight)
-                    + blankfont + local_fnt
+                    + blankfont + local_fnt_face
                     + header_body 
-                    + local_font
+                    + local_fnt_p
                     + build_body(fontSans,fontface_weight) + build_body(fontSans)
                     + build_body(fontSerif,fontface_weight) + build_body(fontSerif) + build_body('NotoMono',fontface_weight)
                     + build_footer(font_name);
@@ -235,9 +236,9 @@
                 else {
                     font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSerif,fontface_weight)
                     + build_font_link('NotoMono',fontface_weight)
-                    + blankfont + local_fnt
+                    + blankfont + local_fnt_face
                     + header_body 
-                    + local_font
+                    + local_fnt_p
                     + build_body(fontSans,fontface_weight) + build_body(fontSerif,fontface_weight) + build_body('NotoMono',fontface_weight) 
                     + build_footer(font_name);
                     script = font_links}
@@ -247,9 +248,9 @@
                 font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontNaskh,fontface_weight)
                 + build_font_link(fontKufi,fontface_weight)
                 + build_font_link(fontNastaliq,fontface_weight)
-                + blankfont + local_fnt
+                + blankfont + local_fnt_face
                 + header_body
-                + local_font
+                + local_fnt_p
                 + build_body(fontSans,fontface_weight) + build_body(fontKufi,fontface_weight) 
                 + build_body(fontNaskh,fontface_weight) + build_body(fontNastaliq,fontface_weight)
                 + build_footer(font_name);
@@ -259,9 +260,9 @@
             function build_hebrew_tests(){
                 font_links = build_font_link(fontSans,fontface_weight) + build_font_link(fontSerif,fontface_weight)
                 + build_font_link(fontRashi,fontface_weight)
-                + blankfont + local_fnt
+                + blankfont + local_fnt_face
                 + header_body
-                + local_font
+                + local_fnt_p
                 + build_body(fontSans,fontface_weight) + build_body(fontSerif,fontface_weight) 
                 + build_body(fontRashi,fontface_weight)
                 + build_footer(font_name);
@@ -271,26 +272,26 @@
             function build_ArimoTinosCousine_tests(){
                 if(document.getElementById('Italic_check').checked){
                     font_links = build_font_link(script_name,fontface_weight) + build_font_link(script_name, 'Italic')
-                    + blankfont + local_fnt
+                    + blankfont + local_fnt_face
                     + header_body 
-                    + local_font
+                    + local_fnt_p
                     + build_body(script_name,fontface_weight) + build_body(script_name)
                     + build_footer(script_name);
                     script = font_links}
 			   else {
                     font_links = build_font_link(script_name,fontface_weight)
-                    + blankfont + local_fnt
+                    + blankfont + local_fnt_face
                     + header_body 
-                    + local_font
+                    + local_fnt_p
                     + build_body(script_name,fontface_weight) + build_footer(script_name);
                     script = font_links}
             }
 			   
             function build_Symbols_tests(font_name = fontSans){
                 font_links = build_font_link(font_name,fontface_weight) + build_font_link('NotoSansSymbols2','Regular')
-                + blankfont + local_fnt
+                + blankfont + local_fnt_face
                 + header_body 
-                + local_font
+                + local_fnt_p
                 + build_body(font_name,fontface_weight) + build_body('NotoSansSymbols2','Regular') 
                 + build_footer(font_name);
                 script = font_links
@@ -298,9 +299,9 @@
 			   
             function build_Nushu_tests(font_name = fontSans){
                 font_links = build_font_link(font_name,fontface_weight) + build_font_link('NotoTraditionalNushu',fontface_weight)
-                + blankfont + local_fnt
+                + blankfont + local_fnt_face
                 + header_body 
-                + local_font
+                + local_fnt_p
                 + build_body(font_name,fontface_weight) + build_body('NotoTraditionalNushu',fontface_weight) 
                 + build_footer(font_name);
                 script = font_links 
