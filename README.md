@@ -8,4 +8,4 @@ Helps in comparing multiple fonts without unwanted fonts interference
 Use the correct language code
 Render RTL/LTR locales
 
-Please note the tool uses Blank font as a fallback font to ensure there are no unwanted fonts involved in the rendering. This fallback font and any local font  should be in the same directory where the test case is.
+Please note the tool uses Blank font as a fallback font to ensure there are no unwanted fonts involved in the rendering. This fallback font and any local fonts used in the test should be in the same directory where the test case is created.
