@@ -1,20 +1,11 @@
-# Google-Noto-font-test-cases-generator
-Automated tool to generate HTML test cases for noto fonts.
+# Font-test-generator
+This tool is designed to help in generating HTML test cases for fonts using text or Unicode hex digits. Tool will create a test case with all font styles available for the script selected. We focused on having this tool able to work independently on desktop and on mobile devices without any type of installation. 
 
-What is Font test generator?
-Font test generator is a HTML/javascript based tool used to create test cases for noto fonts (Google fonts). This tool allows users to test scripts using specific fonts. Usres can easily choose the font family, font weight and font type. 
-
-Why do I need this tool?
+Why do we need this tool?
 Consistent test cases
-Reduce the time to create test case by 80%
+Reduce the time to create test cases by up to 95%
+Helps in comparing multiple fonts without unwanted fonts interference
+Use the correct language code
+Render RTL/LTR locales
 
-
-What's new:
-Font test generator V-1.0
-Background shade to detect any clipping in the font
-Users can type in the text using code points (actual unicode points)
-Added a blank font as a fallback font to avoid using other fonts glyphs 
-Display the font directory
-Display the date test created
-UI compatible with mobile devices
-
+Please note the tool uses Blank font as a fallback font to ensure there are no unwanted fonts involved in the rendering. This fallback font and any local font  should be in the same directory where the test case is.
