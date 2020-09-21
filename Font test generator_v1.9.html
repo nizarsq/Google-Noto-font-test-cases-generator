@@ -459,31 +459,31 @@
 			  <div style = "background-color: #dbdbdb;margin-left: 1px;" class="container">
 				  <div class="form-group">
 					  <label for="font_directory">Font directory</label>
-					  <input style="min-width:30vw" type="text" class="form-control" id="font_directory" value="https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@master/" name="font_directory">
+					  <input style="min-width:35vw; font-size:2vmin;" type="text" class="form-control" id="font_directory" value="https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts@master/" name="font_directory">
 				  </div>
 				  
 				  <div class="form-group">
 					  <label for="font_local"> Local font</label>
-					  <input style="min-width:30vw;" type="file" class="form-control" id="font_local" name="font_local" accept=".ttf,.otf">
+					  <input style="min-width:30vw; font-size:2vmin;" type="file" class="form-control" id="font_local" name="font_local" accept=".ttf,.otf">
 				  </div>
 		  </fieldset>
 		  <fieldset>
 			  <div style = "background-color: #dbdbdb;margin-left: 1px;" class="container">
 				  <div class="form-group">
 					  <label for="font_directory">Script name</label>
-					  <input style="width:50%" type="text" class="form-control" id="font_name" value="" name="font_name">
+					  <input style="width:60%; font-size:2vmin;" type="text" class="form-control" id="font_name" value="" name="font_name" >
 				  </div>
 				  
 				  <div class="form-group">
 					  <label for="language">Language code</label>
-					  <input style="width:30%" type="text" class="form-control" id="language" value="" name="language">
+					  <input style="width:30%; font-size:2vmin;" type="text" class="form-control" id="language" value="" name="language">
 				  </div>
 		  </fieldset>
 		  <fieldset>
 			  <div style = "background-color: #dbdbdb;margin-left: 1px;" class="container">
 				  <div class="form-group">
 					  <label for="hinted">Hinted/Unhinted</label>
-					  <select style="border-radius: 15px;max-width:20vw;" class="form-control" id="hinted" name="hinted">
+					  <select style="border-radius:15px; font-size:2vmin;" class="form-control" id="hinted" name="hinted">
 						  <option value="unhinted">unhinted</option>
 						  <option value="hinted">hinted</option>
 					  </select>
@@ -491,7 +491,7 @@
 				  
 				  <div class="form-group">
 					  <label for="hinted">Font Type (ttf/otf)</label>
-					  <select style="border-radius: 15px;max-width:20vw;" class="form-control" id="ttf_otf" name="ttf_otf">
+					  <select style="border-radius:15px; font-size:2vmin;" class="form-control" id="ttf_otf" name="ttf_otf">
 						  <option value="ttf">.ttf</option>
 						  <option value="otf">.otf</option>
 					  </select>
@@ -499,7 +499,7 @@
 				  
 				  <div class="form-group">
 					  <label for="font_weight">Font weight</label>
-					  <select style="border-radius: 15px;max-width:20vw;" class="form-control" id="font_weight" name="font_weight">
+					  <select style="border-radius: 15px; font-size:2vmin;" class="form-control" id="font_weight" name="font_weight">
 						  <option value="Regular">Regular</option>
 						  <option value="Medium">Medium</option>
 						  <option value="SemiBold">SemiBold</option>
@@ -531,34 +531,31 @@
 				  
 				  <div class="form-group">
 					  <label><input type="checkbox" id="Italic_check"> Include Italic fonts</label>
-				  </div>
-				  
-				  <div class="form-group">
-					  <label><input type="checkbox" id="Include_system"> Include the testing environment info</label>
+					  <label><input type="checkbox" id="Include_system"> Include testing environment info</label>
 					  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="If checked, OS and Browser info will be includede in the test case">
 						  <i class="fa fa-info-circle" style="font-size:12px" Hover="fff"></i>
 				  </div>
 		  </fieldset>
 		  <fieldset>
 			  <label style="margin-left: 12px;" for="text_script">Text to test</label>
-			  <input style="width: 100%;padding: .6em 1.4em; margin-left: 12px;" id="text_script" name="text" placeholder="Enter text here" type="text" dir="Auto">
+			  <input style="width: 100%;padding: .6em 1.4em; margin-left: 12px; font-size:2vmin;" id="text_script" name="text" placeholder="Enter text here" type="text" dir="Auto">
 			  <label style="margin-left: 12px;" for="text_unicode">Unicode hex digits</label>
 			  <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="To insert space or new line use shift+Space or shift+Enter">
 				  <i class="fa fa-info-circle" style="font-size:12px" Hover="fff"></i>
-				  <input style="width: 100%;padding: .6em 1.4em; margin-left: 12px;" id="text_unicode" name="text_unicode" placeholder="Enter text as unicode hex digits separated by spaces" type="text">
+				  <input style="width:100%; padding: .6em 1.4em; margin-left: 12px; font-size:2vmin;" id="text_unicode" name="text_unicode" placeholder="Enter text as unicode hex digits separated by spaces" type="text">
 			  </span>
-			  <label style="margin-left: 12px;" for="HTML">HTML code</label>
-			  <textarea style="margin-left: 12px;" id="HTML" name="HTML" placeholder="" style="height:100px"></textarea>
+			  <label style="margin-left:12px;" for="HTML">HTML code</label>
+			  <textarea style="margin-left:12px; height:100px;" id="HTML" name="HTML" placeholder=""></textarea>
 			  
 			  <div style = "background-color: #dbdbdb;margin-left: 1px;" class="container">
 				  <div class="form-group">
 					  <label for="bug_number">Bug number</label>
-					  <input style="width:25%" type="text" class="form-control" id="bug_number" value="" name="bug_number">
+					  <input style="width:25%; font-size:2vmin;" type="text" class="form-control" id="bug_number" value="" name="bug_number">
 				  </div>
 
 				  <div class="form-group">
 					  <label for="note">Optional note</label>
-					  <input style="width:60%" type="text" class="form-control" id="note" value="" name="note" placeholder=" null">
+					  <input style="width:60%; font-size:2vmin;" type="text" class="form-control" id="note" value="" name="note" placeholder=" null">
 				  </div>
 		  </fieldset>
 	  </form>
