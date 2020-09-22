@@ -266,14 +266,16 @@
 						var fontKufi = 'NotoKufiArabic';
 						var fontNastaliq = 'NotoNastaliqUrdu';
 						
-						font_links = build_font_link(main_font,fontface_weight) + build_font_link(fontNaskh,fontface_weight)
+						font_links = build_font_link(main_font,fontface_weight) 
+						+ build_font_link(main_font_UI,fontface_weight) 
+						+ build_font_link(fontNaskh,fontface_weight)
 						+ build_font_link(fontNaskhUI,fontface_weight)
 						+ build_font_link(fontKufi,fontface_weight)
 						+ build_font_link(fontNastaliq,fontface_weight)
 						+ blankfont + local_fnt_face
 						+ header_body
 						+ local_fnt_p
-						+ build_body(main_font,fontface_weight) + build_body(fontKufi,fontface_weight) 
+						+ build_body(main_font,fontface_weight) + build_body(main_font_UI,fontface_weight)+ build_body(fontKufi,fontface_weight) 
 						+ build_body(fontNaskh,fontface_weight)+ build_body(fontNaskhUI,fontface_weight) + build_body(fontNastaliq,fontface_weight)
 						+ build_footer(font_name);
 						script = font_links
