@@ -277,7 +277,7 @@
 						+ local_fnt_p
 						+ build_body(main_font,fontface_weight) + build_body(main_font_UI,fontface_weight)+ build_body(fontKufi,fontface_weight) 
 						+ build_body(fontNaskh,fontface_weight)+ build_body(fontNaskhUI,fontface_weight) + build_body(fontNastaliq,fontface_weight)
-						+ build_footer(font_name);
+						+ build_footer(main_font);
 						script = font_links
 					}
 
@@ -291,57 +291,57 @@
 						+ local_fnt_p
 						+ build_body(main_font,fontface_weight) + build_body(fontSerif,fontface_weight) 
 						+ build_body(fontRashi,fontface_weight)
-						+ build_footer(font_name);
+						+ build_footer(main_font);
 						script = font_links
 					}
 
 					function build_ArimoTinosCousine_tests(){
 						if(document.getElementById('Italic_check').checked){
-							font_links = build_font_link(font_name,fontface_weight) + build_font_link(font_name, 'Italic')
+							font_links = build_font_link(main_font,fontface_weight) + build_font_link(main_font, 'Italic')
 							+ blankfont + local_fnt_face
 							+ header_body 
 							+ local_fnt_p
-							+ build_body(font_name,fontface_weight) + build_body(font_name)
-							+ build_footer(font_name);
+							+ build_body(main_font,fontface_weight) + build_body(main_font)
+							+ build_footer(main_font);
 							script = font_links
 						}
 						else{
-							font_links = build_font_link(font_name,fontface_weight)
+							font_links = build_font_link(main_font,fontface_weight)
 							+ blankfont + local_fnt_face
 							+ header_body 
 							+ local_fnt_p
-							+ build_body(font_name,fontface_weight) + build_footer(font_name);
+							+ build_body(main_font,fontface_weight) + build_footer(main_font);
 							script = font_links
 						}
 					}
 
 					function build_Symbols_tests(font_name = main_font){
-						font_links = build_font_link(font_name,fontface_weight) + build_font_link('NotoSansSymbols2','Regular')
+						font_links = build_font_link(main_font,fontface_weight) + build_font_link('NotoSansSymbols2','Regular')
 						+ blankfont + local_fnt_face
 						+ header_body 
 						+ local_fnt_p
 						+ build_body(font_name,fontface_weight) + build_body('NotoSansSymbols2','Regular') 
-						+ build_footer(font_name);
+						+ build_footer(main_font);
 						script = font_links
 					}
 			   
 					function build_Nushu_tests(font_name = main_font){
-						font_links = build_font_link(font_name,fontface_weight) + build_font_link('NotoTraditionalNushu',fontface_weight)
+						font_links = build_font_link(main_font,fontface_weight) + build_font_link('NotoTraditionalNushu',fontface_weight)
 						+ blankfont + local_fnt_face
 						+ header_body 
 						+ local_fnt_p
-						+ build_body(font_name,fontface_weight) + build_body('NotoTraditionalNushu',fontface_weight) 
-						+ build_footer(font_name);
+						+ build_body(main_font,fontface_weight) + build_body('NotoTraditionalNushu',fontface_weight) 
+						+ build_footer(fontmain_font_name);
 						script = font_links
 					}
 
-					function build_single_tests(font_name){
-						font_links = build_font_link(font_name,fontface_weight)                
+					function build_single_tests(main_font){
+						font_links = build_font_link(main_font,fontface_weight)                
 						+ blankfont + local_fnt_face
 						+ header_body 
 						+ local_fnt_p
-						+ build_body(font_name,fontface_weight)
-						+ build_footer(font_name);
+						+ build_body(main_font,fontface_weight)
+						+ build_footer(main_font);
 						script = font_links 
 					}
 
