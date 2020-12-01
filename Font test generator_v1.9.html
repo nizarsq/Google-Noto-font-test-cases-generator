@@ -95,7 +95,7 @@
 
 					//Font name map for none standerd fonts name
 					var lst_of_special_name_fonts = 
-					    {"Music":"NotoMusic","Arimo":"Arimo","Tinos":"Tinos","Cousine":"Cousine","Mono":"NotoMono",
+					    {"Music":"NotoMusic","Arimo":"Arimo","Tinos":"Tinos","Cousine":"Cousine","Mono":"NotoSansMono",
 					     "NyiakengPuachueHmong":"NotoSerifNyiakengPuachueHmong","Tangut":"NotoSerifTangut",
 					     "Tibetan":"NotoSerifTibetan","NastaliqUrdu":"NotoNastaliqUrdu"}
 					var script = ''
@@ -238,22 +238,22 @@
 					function build_LGC_tests(){
 						if (document.getElementById('Italic_check').checked){
 							font_links = build_font_link(main_font,fontface_weight) + build_font_link(main_font)
-							+ build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif )+ build_font_link('NotoMono',fontface_weight)
+							+ build_font_link(fontSerif,fontface_weight)+ build_font_link(fontSerif )+ build_font_link('NotoSansMono',fontface_weight)
 							+ blankfont + local_fnt_face
 							+ header_body 
 							+ local_fnt_p
 							+ build_body(main_font,fontface_weight) + build_body(main_font)
-							+ build_body(fontSerif,fontface_weight) + build_body(fontSerif) + build_body('NotoMono',fontface_weight)
+							+ build_body(fontSerif,fontface_weight) + build_body(fontSerif) + build_body('NotoSansMono',fontface_weight)
 							+ build_footer(font_name);
 							script = font_links
 						}
 						else{
 							font_links = build_font_link(main_font,fontface_weight) + build_font_link(fontSerif,fontface_weight)
-							+ build_font_link('NotoMono',fontface_weight)
+							+ build_font_link('NotoSansMono',fontface_weight)
 							+ blankfont + local_fnt_face
 							+ header_body 
 							+ local_fnt_p
-							+ build_body(main_font,fontface_weight) + build_body(fontSerif,fontface_weight) + build_body('NotoMono',fontface_weight) 
+							+ build_body(main_font,fontface_weight) + build_body(fontSerif,fontface_weight) + build_body('NotoSansMono',fontface_weight) 
 							+ build_footer(font_name);
 							script = font_links
 						}
@@ -389,7 +389,7 @@
 			function save_File(){
 				var filename = document.getElementById("font_name").value
 				if(document.getElementById("font_name").value == ""){
-					filename = 'NotoSans_NotoSerif_NotoMono'
+					filename = 'NotoSans_NotoSerif_NotoSansMono'
 				}
 				
 				const test = document.getElementById('HTML');
@@ -424,7 +424,7 @@
 				border-radius: 15px;
 				border-radius: 15px;}
 			input[type=submit]:hover{
-				background-color: #4HHF50;}
+				background-color: #286090;}
 			fieldset{
 				padding: .6em 1.4em .5em .8em;
 				border-radius: 4px;
